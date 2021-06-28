@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'carbon-components-react';
+import CPVScanner from './../../components/CPVScanner';
 
 export const CPVLandingPage = () => (
 <div className="bx--grid cpv-landing-page__grid">
@@ -20,8 +21,8 @@ export const CPVLandingPage = () => (
     </div>
   </div>
   <div className="bx--row cpv-landing-page__r3">
-    <div className="bx--col-lg-8">
-      <Button>Scan QR Code</Button>
+    <div className="bx--col-lg-16">
+      <CPVScanner />
     </div>
   </div>
 </div>);
