@@ -1,0 +1,19 @@
+@import './mixins';
+
+.cpv-landing-page__banner {
+  padding: $spacing-05 $spacing-06 $spacing-04;
+  @include cpv-landing-page-background;
+}
+
+.cpv-landing-page__r2 {
+  padding: 0 $spacing-06 $spacing-06;
+  @include cpv-landing-page-background;
+}
+
+.cpv-landing-page__r3 {
+  padding: $spacing-06;
+}
+
+.cpv-landing-page__p {
+  margin-top: $spacing-03;
+}
