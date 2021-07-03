@@ -13,7 +13,7 @@ export const CPVLandingPage = () => (
   </div>
   <div className="bx--row">
     <div className="bx--col-lg-16">
-      <p>Compatible with both EU Digital Green Certificates and UK NHS COVID Passes.</p>
+      <p>Compatible with EU Digital COVID Certificates 🇪🇺 and NHS COVID Passes 🇬🇧.</p>
     </div>
   </div>
   <div className="bx--row cpv-landing-page__scanner">

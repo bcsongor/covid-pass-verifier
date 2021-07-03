@@ -1,0 +1,16 @@
+.cpv-qr-data-parser__accordion {
+  margin-top: $spacing-06;
+
+  .bx--accordion__content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .bx--data-table-content {
+    margin-bottom: $spacing-06;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+  }
+}

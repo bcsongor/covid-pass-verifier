@@ -1,0 +1,11 @@
+.cpv-scanner__grid {
+  padding: 0 $spacing-05;
+}
+
+.cpv-scanner__status {
+  text-align: center;
+
+  &.red { color: $support-01; }
+  &.amber { color: $support-03; }
+  &.green { color: $support-02; }
+}

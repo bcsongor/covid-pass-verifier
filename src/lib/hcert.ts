@@ -1,4 +1,4 @@
-interface VaccinationGroup {
+export interface VaccinationGroup {
   tg: string; // target disease, e.g. "840539006" for COVID-19
   vp: string; // vaccine, e.g. "1119349007" for a SARS-CoV-2 mRNA vaccine
   mp: string; // vaccine product
@@ -11,7 +11,7 @@ interface VaccinationGroup {
   ci: string; // unique certificate identifier
 };
 
-interface DigitalHealthCertificate {
+export interface DigitalHealthCertificate {
   ver: string; // version
   dob: string; // date of birth
   nam: {

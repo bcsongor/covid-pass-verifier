@@ -64,7 +64,7 @@ export const parseHCERT = (barcodePayload: string): HCERT => {
   }
 
   // Deconstruct the COSE sign structure (https://datatracker.ietf.org/doc/html/rfc8152#page-17)
-  const [prot, unprot, payload, signers] = coseSignedMsg.value;
+  const [, , payload] = coseSignedMsg.value; // Array content: [protected, unprotected, payload, signers]. We only use the payload for now.
 
   // https://raw.githubusercontent.com/ehn-dcc-development/ehn-dcc-schema/release/1.3.0/DCC.combined-schema.json
 
