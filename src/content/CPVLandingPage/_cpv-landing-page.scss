@@ -1,19 +1,31 @@
 @import './mixins';
 
+.cpv-landing-page__grid {
+  max-width: 414px;
+  padding: 0 $spacing-06;
+}
+
 .cpv-landing-page__banner {
-  padding: $spacing-05 $spacing-06 $spacing-04;
-  @include cpv-landing-page-background;
+  padding: $spacing-08 0;
 }
 
-.cpv-landing-page__r2 {
-  padding: 0 $spacing-06 $spacing-06;
-  @include cpv-landing-page-background;
+.cpv-landing-page__heading {
+  padding-bottom: $spacing-03;
+  @include carbon--type-style('productive-heading-06');
 }
 
-.cpv-landing-page__r3 {
-  padding: $spacing-06;
+.cpv-landing-page__subheading {
+  @include carbon--type-style('productive-heading-03');
 }
 
-.cpv-landing-page__p {
-  margin-top: $spacing-03;
+.cpv-landing-page__scanner {
+  padding: $spacing-08 0;
+}
+
+.cpv-landing-page__disclaimer {
+  color: $text-05;
+
+  p {
+    margin-bottom: $spacing-03;
+  }
 }

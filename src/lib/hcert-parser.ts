@@ -3,7 +3,6 @@ import * as cbor from 'cbor-web';
 
 import { inflate } from '@cpv/lib/zlib';
 import { HCERT } from '@cpv/lib/hcert';
-// const cbor = require('cbor-web');
 
 /** CBOR tags used for COSE message identification. */
 enum CBORTags {

@@ -8,14 +8,9 @@ import CPVLandingPage from '@cpv/content/CPVLandingPage';
 
 function App() {
   return (
-    <>
-      <CPVHeader/>
-      <Content className="app__content">
-        <Switch>
-          <Route exact path="/" component={CPVLandingPage} />
-        </Switch>
-      </Content>
-    </>
+    <Switch>
+      <Route exact path="/" component={CPVLandingPage} />
+    </Switch>
   );
 }
 

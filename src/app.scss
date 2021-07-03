@@ -1,6 +1,4 @@
-//@import 'carbon-components/scss/globals/scss/vendor/@carbon/type/scss/font-family.scss';
-//@import 'carbon-components/scss/globals/scss/vendor/@carbon/layout/scss/breakpoint.scss';
-//@import 'carbon-components/scss/globals/scss/typography.scss';
+@import 'carbon-components/scss/globals/scss/typography.scss';
 @import 'carbon-components/scss/globals/scss/vars.scss';
 
 @import '@cpv/components/CPVHeader/cpv-header';
@@ -8,5 +6,4 @@
 
 .app__content {
   padding: 0;
-  background-color: $ui-02;
 }
