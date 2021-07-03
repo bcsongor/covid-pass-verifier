@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'carbon-components-react';
-import CPVScanner from './../../components/CPVScanner';
+
+import CPVScanner from '@cpv/components/CPVScanner';
 
 export const CPVLandingPage = () => (
 <div className="bx--grid cpv-landing-page__grid">

@@ -3,8 +3,8 @@
 //@import 'carbon-components/scss/globals/scss/typography.scss';
 @import 'carbon-components/scss/globals/scss/vars.scss';
 
-@import './components/CPVHeader/cpv-header';
-@import './content/CPVLandingPage/cpv-landing-page';
+@import '@cpv/components/CPVHeader/cpv-header';
+@import '@cpv/content/CPVLandingPage/cpv-landing-page';
 
 .app__content {
   padding: 0;

@@ -2,9 +2,9 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Content } from 'carbon-components-react';
 
-import './app.scss';
-import CPVHeader from './components/CPVHeader';
-import CPVLandingPage from './content/CPVLandingPage';
+import '@cpv/app.scss';
+import CPVHeader from '@cpv/components/CPVHeader';
+import CPVLandingPage from '@cpv/content/CPVLandingPage';
 
 function App() {
   return (

@@ -1,7 +1,9 @@
 import base45 from 'base45-js/lib/base45-js';
+import * as cbor from 'cbor-web';
+
 import { inflate } from '@cpv/lib/zlib';
 import { HCERT } from '@cpv/lib/hcert';
-const cbor = require('cbor-web');
+// const cbor = require('cbor-web');
 
 /** CBOR tags used for COSE message identification. */
 enum CBORTags {

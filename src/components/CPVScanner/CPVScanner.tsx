@@ -1,7 +1,8 @@
 import React from 'react';
 import { Button } from 'carbon-components-react';
-import CPVQrReader from './../CPVQrReader';
-import CPVQrDataParser from './../CPVQrDataParser';
+
+import CPVQrReader from '@cpv/components/CPVQrReader';
+import CPVQrDataParser from '@cpv/components/CPVQrDataParser';
 
 export const CPVScanner = () => {
   const [isScanning, setIsScanning] = React.useState<boolean>(false);
