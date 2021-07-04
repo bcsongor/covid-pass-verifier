@@ -5,10 +5,6 @@
   "dependencies": {
     "@carbon/grid": "^10.30.0",
     "@carbon/icons-react": "10.22.0",
-    "@craco/craco": "^6.1.2",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
     "@types/carbon-components-react": "^7.36.0",
     "@types/carbon__icons-react": "^10.31.0",
     "@types/jest": "^26.0.15",
@@ -23,21 +19,28 @@
     "carbon-components-react": "^7.38.0",
     "carbon-icons": "^7.0.7",
     "cbor-web": "^7.0.5",
-    "craco-alias": "^3.0.1",
-    "node-sass": "^5.0.0",
     "pako": "^2.0.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-qr-reader": "^2.2.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
-    "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
+  },
+  "devDependencies": {
+    "@craco/craco": "^6.2.0",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "craco-alias": "^3.0.1",
+    "node-sass": "^5.0.0",
+    "react-scripts": "4.0.3",
+    "typescript": "^4.3.5"
   },
   "scripts": {
     "start": "NODE_OPTIONS='--max-old-space-size=8192' craco start",
-    "build": "craco build",
+    "build": "NODE_OPTIONS='--max-old-space-size=8192' craco build",
     "test": "craco test",
+    "deploy": "scripts/deploy.sh",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
