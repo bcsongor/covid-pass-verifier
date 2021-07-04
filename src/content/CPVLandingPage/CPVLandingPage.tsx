@@ -28,7 +28,10 @@ export const CPVLandingPage = () => (
         device and no data is sent to external servers.
       </p>
       <p>
-        <LogoGithub32 />
+        <div className="icon">
+          <LogoGithub32 />
+          <span className="label">(Coming soon!)</span>
+        </div>
       </p>
     </div>
   </div>

@@ -26,4 +26,14 @@
   p {
     margin-bottom: $spacing-03;
   }
+
+  .icon {
+    display: flex;
+    align-items: center;
+
+    .label {
+      color: $decorative-01;
+      margin-left: $spacing-03;
+    }
+  }
 }
