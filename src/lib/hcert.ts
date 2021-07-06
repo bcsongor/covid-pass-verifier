@@ -32,4 +32,5 @@ export interface HCERT {
   iat: number; // issued at timestamp
   exp: number; // expires at timestamp
   hcert: DigitalHealthCertificate;
+  sig: boolean; // signature validity
 };

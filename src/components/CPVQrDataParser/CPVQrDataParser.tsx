@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Accordion, AccordionItem, CodeSnippet, Table, TableHead, TableBody, TableRow, TableHeader, TableCell } from 'carbon-components-react';
 
 import { HCERT, VaccinationGroup } from '@cpv/lib/hcert';
@@ -48,12 +48,28 @@ const hcertVaccineMappings: HCERTMappings<VaccinationGroup> = {
 };
 
 export const CPVQrDataParser = ({ qrData, onHCERTStatus }: Props) => {
-  const hcert = parseHCERT(qrData);
-  const status = validateHCERT(hcert);
+  const [hcert, setHcert] = useState<HCERT | null>(null);
 
   useEffect(() => {
-    onHCERTStatus(status);
-  });
+    async function getHcert() {
+      let status = HCERTStatus.Error;
+
+      try {
+        const hcert = await parseHCERT(qrData);
+        setHcert(hcert);
+        status = validateHCERT(hcert);
+      } catch (e) {
+        console.error(e);
+      }
+
+      onHCERTStatus(status);
+    }
+    getHcert();
+  }, [qrData]);
+
+  if (hcert === null) {
+    return null;
+  }
 
   return (
     <Accordion className="cpv-qr-data-parser__accordion">

@@ -27,12 +27,10 @@ export const CPVLandingPage = () => (
         All processing (including scanning, parsing and verification) happens on the local
         device and no data is sent to external servers.
       </p>
-      <p>
-        <div className="icon">
-          <LogoGithub32 />
-          <span className="label">(Coming soon!)</span>
-        </div>
-      </p>
+      <div className="icon">
+        <LogoGithub32 />
+        <span className="label">(Coming soon!)</span>
+      </div>
     </div>
   </div>
 </div>);

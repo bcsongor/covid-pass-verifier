@@ -25,6 +25,16 @@ const hcertStatusMapping = {
     icon: <Misuse32 />,
     label: 'Expired',
     className: 'red'
+  },
+  [HCERTStatus.UnverifiedSignature]: {
+    icon: <Misuse32 />,
+    label: 'Unverified Signature',
+    className: 'red'
+  },
+  [HCERTStatus.Error]: {
+    icon: <Misuse32 />,
+    label: 'Error',
+    className: 'red'
   }
 };
 
