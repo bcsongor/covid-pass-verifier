@@ -97,7 +97,7 @@ export const CPVQrDataParser = ({ qrData, onHCERTStatus }: Props) => {
             <Table key={title + idx} size="sm">
               <TableHead>
                 <TableRow>
-                  <TableHeader colSpan={2}>{title} {idx + 1}/{v.sd}</TableHeader>
+                  <TableHeader colSpan={2}>{title}</TableHeader>
                 </TableRow>
               </TableHead>
               <TableBody>
