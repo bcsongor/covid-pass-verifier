@@ -45,11 +45,29 @@ const fetchX509Tag = (buff, tag) => {
 };
 
 (async function main(params) {
-  const res = await fetch('https://dgc.a-sit.at/ehn/cert/listv2');
+  // Test certificates from AT government.
+  /*const res = await fetch('https://dgc.a-sit.at/ehn/cert/listv2');
   const listv2cbor = await res.buffer();
   const listv2 = cbor.decode(listv2cbor);
 
   const certs = listv2.c.map(c => {
+    return {
+      kid: c.i.toJSON().data,
+      crt: c.c.toJSON().data,
+      iss: fetchX509Tag(c.c, 'Issuer'),
+      sub: fetchX509Tag(c.c, 'Subject'),
+      pub: fetchPublicKey(c.c)
+    }
+  });*/
+
+  // Production trust list from AT government.
+  // See discussion: https://github.com/eu-digital-green-certificates/dgc-participating-countries/issues/10
+  const res = await fetch('https://greencheck.gv.at/api/masterdata');
+  const json = await res.json();
+  const trustListCbor = Buffer.from(json.trustList.trustListContent, 'base64');
+  const trustList = cbor.decode(trustListCbor);
+
+  const certs = trustList.c.map(c => {
     return {
       kid: c.i.toJSON().data,
       crt: c.c.toJSON().data,
