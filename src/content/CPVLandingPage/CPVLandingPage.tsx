@@ -1,5 +1,4 @@
 import React from 'react';
-import { LogoGithub32 } from '@carbon/icons-react';
 
 import CPVScanner from '@cpv/components/CPVScanner';
 
@@ -27,10 +26,16 @@ export const CPVLandingPage = () => (
         All processing (including scanning, parsing and verification) happens on the local
         device and no data is sent to external servers.
       </p>
-      <div className="icon">
-        <LogoGithub32 />
-        <span className="label">(Coming soon!)</span>
-      </div>
+      <p>
+        Please <a href="mailto:hello@covid-pass-verifier.com" target="_blank">email me</a> at <span className="email">
+          hello@covid-pass-verifier.com</span> with any questions or concerns.
+        The source code for the enitre web application will be made public on GitHub.
+      </p>
+    </div>
+  </div>
+  <div className="bx--row">
+    <div className="bx--col-lg-8 bx--offset-lg-4 bx--col-sm-2 bx--offset-sm-1 cpv-landing-page__footer">
+      v20210712-cee0268
     </div>
   </div>
 </div>);

@@ -27,13 +27,20 @@
     margin-bottom: $spacing-03;
   }
 
-  .icon {
-    display: flex;
-    align-items: center;
-
-    .label {
-      color: $decorative-01;
-      margin-left: $spacing-03;
-    }
+  a, a:hover, a:active {
+    text-decoration: none;
+    color: $link-01;
   }
+
+  .email {
+    @include carbon--type-style('code-02');
+  }
+}
+
+.cpv-landing-page__footer {
+  margin-top: $spacing-06;
+  padding: $spacing-03;
+  background-color: $ui-01;
+  color: $disabled-02;
+  text-align: center;
 }
