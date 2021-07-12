@@ -102,16 +102,16 @@ export const parseHCERT = async (barcodePayload: string): Promise<HCERT> => {
   // TODO: Temporary exclusion for certificates we still need to acquire (e.g. UK's NHS).
   const isExcluded = EXCLUDED_KIDS.some(ekid => equal8(kid, ekid));
 
-  let sig = false; // isExcluded;
+  let sig = isExcluded;
 
   if (!isExcluded) {
     const crt = findCertificate(kid);
     if (crt === undefined) {
-      throw new Error(`could not find certificate for kid: ${kid}`);
+      throw new Error(`could not find certificate for kid: ${kid.toString('hex')}`);
     }
 
     if (crt.pub === null) {
-      throw new Error(`could not find public key in certificate for kid: ${kid}`);
+      throw new Error(`could not find public key in certificate for kid: ${kid.toString('hex')}`);
     }
 
     try {

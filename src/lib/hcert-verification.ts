@@ -5,12 +5,12 @@ export enum HCERTStatus {
   PartiallyVaccinated,
   NotVaccinated,
   Expired,
-  InvalidSignature,
+  UnverifiedSignature,
   Error
 };
 
 export const validateHCERT = ({ iat, exp, hcert, sig }: HCERT): HCERTStatus => {
-  if (!sig) return HCERTStatus.InvalidSignature;
+  if (!sig) return HCERTStatus.UnverifiedSignature;
 
   const now = Math.floor(Date.now() / 1000);
 
