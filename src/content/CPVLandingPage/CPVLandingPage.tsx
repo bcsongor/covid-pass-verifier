@@ -27,7 +27,7 @@ export const CPVLandingPage = () => (
         device and no data is sent to external servers.
       </p>
       <p>
-        Please <a href="mailto:hello@covid-pass-verifier.com" target="_blank">email me</a> at <span className="email">
+        Please <a href="mailto:hello@covid-pass-verifier.com" target="_blank" rel="noreferrer">email me</a> at <span className="email">
           hello@covid-pass-verifier.com</span> with any questions or concerns.
         The source code for the enitre web application will be made public on GitHub.
       </p>
@@ -35,7 +35,7 @@ export const CPVLandingPage = () => (
   </div>
   <div className="bx--row">
     <div className="bx--col-lg-8 bx--offset-lg-4 bx--col-sm-2 bx--offset-sm-1 cpv-landing-page__footer">
-      v20210712-cee0268
+      v{process.env.REACT_APP_GIT_DATE}-{process.env.REACT_APP_GIT_SHA}
     </div>
   </div>
 </div>);

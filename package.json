@@ -42,8 +42,8 @@
     "typescript": "^4.3.5"
   },
   "scripts": {
-    "start": "NODE_OPTIONS='--max-old-space-size=8192' craco start",
-    "build": "NODE_OPTIONS='--max-old-space-size=8192' craco build",
+    "start": "NODE_OPTIONS='--max-old-space-size=8192' REACT_APP_GIT_DATE=`git log -1 --format=%at | xargs -I{} date -d @{} +%Y%m%d` REACT_APP_GIT_SHA=`git rev-parse --short HEAD` craco start",
+    "build": "NODE_OPTIONS='--max-old-space-size=8192' REACT_APP_GIT_DATE=`git log -1 --format=%at | xargs -I{} date -d @{} +%Y%m%d` REACT_APP_GIT_SHA=`git rev-parse --short HEAD` craco build",
     "test": "craco test",
     "deploy": "scripts/deploy.sh",
     "update-certificates": "scripts/update-certificates.js",
