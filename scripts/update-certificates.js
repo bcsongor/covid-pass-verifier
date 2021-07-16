@@ -93,7 +93,7 @@ async function fetchUKCertificates() {
     try {
       return {
         kid: Buffer.from(p.kid, 'base64').toJSON().data,
-        crt: null,
+        crt: [],
         iss: { C: 'GB' },
         sub: { C: 'GB' },
         pub: getEcPoints(pubhex),

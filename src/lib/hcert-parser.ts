@@ -46,9 +46,7 @@ enum HCERTClaims {
 }
 
 /** List of kids exludes from the COSE signature verification. */
-const EXCLUDED_KIDS: Uint8Array[] = [
-  new Uint8Array([75,101,121,52,80,82,79]) // NHS UK
-];
+const EXCLUDED_KIDS: Uint8Array[] = [];
 
 /**
  * Parses the given 2D barcode payload.
