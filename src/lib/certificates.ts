@@ -11,8 +11,8 @@ export interface Certificate {
 
 export const certificates: Certificate[] = rawCertificates.map((cert) => ({
   ...cert,
-  kid: new Uint8Array(cert.kid),
-  crt: new Uint8Array(cert.crt),
+  kid: Uint8Array.from(cert.kid),
+  crt: Uint8Array.from(cert.crt),
 }));
 
 export const findCertificate = (kid: Uint8Array): Certificate | undefined =>

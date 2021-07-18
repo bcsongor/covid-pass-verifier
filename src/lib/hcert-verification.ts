@@ -1,24 +1,21 @@
-import { HCERT, VaccinationGroup } from '@cpv/lib/hcert';
+import { HCERT, TestEntry, VaccinationEntry } from '@cpv/lib/hcert';
+import { TargetDisease } from './valuesets/disease-agent-targeted';
+import { TestResult } from './valuesets/test-result';
 
 export enum HCERTStatus {
   FullyVaccinated = 0,
   PartiallyVaccinated,
   NotVaccinated,
+  Negative,
+  Positive,
   Expired,
   UnverifiedSignature,
   Error,
 }
 
-export const validateHCERT = ({ iat, exp, hcert, sig }: HCERT): HCERTStatus => {
-  if (!sig) return HCERTStatus.UnverifiedSignature;
-
-  const now = Math.floor(Date.now() / 1000);
-
-  if (iat > now) return HCERTStatus.Expired;
-  if (exp < now) return HCERTStatus.Expired;
-
+const validateVaccinationGroup = (vg: VaccinationEntry[]): HCERTStatus => {
   // Filter out non-COVID-19 vaccines.
-  const v = hcert.v.filter((vv) => vv.tg === '840539006');
+  const v = vg.filter((vv) => vv.tg === TargetDisease.COVID19);
 
   if (v.length === 0) return HCERTStatus.NotVaccinated;
 
@@ -27,7 +24,7 @@ export const validateHCERT = ({ iat, exp, hcert, sig }: HCERT): HCERTStatus => {
     const grouped = v.reduce((acc, curr) => {
       acc[curr.vp] = [...(acc[curr.vp] || []), curr];
       return acc;
-    }, {} as { [key: string]: VaccinationGroup[] });
+    }, {} as { [key: string]: VaccinationEntry[] });
 
     // For each vaccine get the doses required and current doses.
     const doses = Object.values(grouped).map((group) =>
@@ -52,4 +49,25 @@ export const validateHCERT = ({ iat, exp, hcert, sig }: HCERT): HCERTStatus => {
   }
 
   return HCERTStatus.FullyVaccinated;
+};
+
+const validateTestGroup = (t: TestEntry[]): HCERTStatus => {
+  // ISO-8601 dates can be lexicographically ordered.
+  const latestTest = t.sort((a, b) => b.tt.localeCompare(a.tt))[0];
+
+  if (latestTest.tr === TestResult.Positive) return HCERTStatus.Positive;
+  return HCERTStatus.Negative;
+};
+
+export const validateHCERT = ({ iat, exp, hcert, sig }: HCERT): HCERTStatus => {
+  if (!sig) return HCERTStatus.UnverifiedSignature;
+
+  const now = Math.floor(Date.now() / 1000);
+
+  if (iat > now) return HCERTStatus.Expired;
+  if (exp < now) return HCERTStatus.Expired;
+
+  if (hcert.v) return validateVaccinationGroup(hcert.v);
+  else if (hcert.t) return validateTestGroup(hcert.t);
+  else return HCERTStatus.Error;
 };

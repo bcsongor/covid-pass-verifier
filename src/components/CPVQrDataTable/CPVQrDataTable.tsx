@@ -11,15 +11,18 @@ import {
   TableCell,
 } from 'carbon-components-react';
 
-import { HCERT, VaccinationGroup } from '@cpv/lib/hcert';
+import { HCERT, TestEntry, VaccinationEntry } from '@cpv/lib/hcert';
 import { parseHCERT } from '@cpv/lib/hcert-parser';
 import { validateHCERT, HCERTStatus } from '@cpv/lib/hcert-verification';
-import { formatTimestamp } from '@cpv/lib/time';
+import { formatISO8601Timestamp, formatTimestamp } from '@cpv/lib/time';
 // import { getCountry } from '@cpv/lib/valuesets/country-2-codes';
 import { getTargetDisease } from '@cpv/lib/valuesets/disease-agent-targeted';
 import { getVaccineProphylaxis } from '@cpv/lib/valuesets/vaccine-prophylaxis';
 import { getVaccineMedicinalProduct } from '@cpv/lib/valuesets/vaccine-medicinal-product';
 import { getVaccineManufacturer } from '@cpv/lib/valuesets/vaccine-manufacturer';
+import { getTestResult } from '@cpv/lib/valuesets/test-result';
+import { getTestManufacturer } from '@cpv/lib/valuesets/test-manufacturer';
+import { getTestType } from '@cpv/lib/valuesets/test-type';
 
 type Props = {
   qrData: string;
@@ -28,7 +31,7 @@ type Props = {
 
 type HCERTMappings<T> = {
   [title: string]: {
-    [label: string]: (obj: T) => string;
+    [label: string]: (obj: T) => string | undefined;
   };
 };
 
@@ -44,7 +47,7 @@ const hcertMetadataMappings: HCERTMappings<HCERT> = {
   },
 };
 
-const hcertVaccineMappings: HCERTMappings<VaccinationGroup> = {
+const hcertVaccineMappings: HCERTMappings<VaccinationEntry> = {
   Vaccine: {
     'Target Disease': (v) => getTargetDisease(v.tg),
     Vaccine: (v) => getVaccineProphylaxis(v.vp),
@@ -57,16 +60,29 @@ const hcertVaccineMappings: HCERTMappings<VaccinationGroup> = {
   },
 };
 
+const hcertTestMappings: HCERTMappings<TestEntry> = {
+  Test: {
+    'Target Disease': (t) => getTargetDisease(t.tg),
+    'Test Type': (t) => getTestType(t.tt),
+    'Test Manufacturer': (t) => t.nm || (t.ma && getTestManufacturer(t.ma)) || undefined,
+    'Test Time': (t) => formatISO8601Timestamp(t.sc),
+    'Test Result': (t) => getTestResult(t.tr),
+    'Testing Centre': (t) => t.tc,
+    'Country of Test': (t) => t.co,
+    'Certificate Issuer': (t) => t.is,
+  },
+};
+
 export const CPVQrDataTable = ({ qrData, onHCERTStatus }: Props): JSX.Element => {
-  const [hcert, setHcert] = useState<HCERT | null>(null);
+  const [hcert, setHCERT] = useState<HCERT | null>(null);
 
   useEffect(() => {
-    async function getHcert() {
+    async function getHCERT() {
       let status = HCERTStatus.Error;
 
       try {
         const hcert = await parseHCERT(qrData);
-        setHcert(hcert);
+        setHCERT(hcert);
         status = validateHCERT(hcert);
       } catch (e) {
         console.error(e);
@@ -74,7 +90,8 @@ export const CPVQrDataTable = ({ qrData, onHCERTStatus }: Props): JSX.Element =>
 
       onHCERTStatus(status);
     }
-    getHcert();
+
+    getHCERT();
   }, [qrData]);
 
   if (hcert === null) {
@@ -102,7 +119,7 @@ export const CPVQrDataTable = ({ qrData, onHCERTStatus }: Props): JSX.Element =>
           </Table>
         ))}
 
-        {hcert.hcert.v.map((v, idx) =>
+        {hcert.hcert.v?.map((v, idx) =>
           Object.entries(hcertVaccineMappings).map(([title, mappings]) => (
             <Table key={title + idx} size="sm">
               <TableHead>
@@ -117,6 +134,28 @@ export const CPVQrDataTable = ({ qrData, onHCERTStatus }: Props): JSX.Element =>
                     <TableCell>{mapper(v)}</TableCell>
                   </TableRow>
                 ))}
+              </TableBody>
+            </Table>
+          )),
+        )}
+
+        {hcert.hcert.t?.map((t, idx) =>
+          Object.entries(hcertTestMappings).map(([title, mappings]) => (
+            <Table key={title + idx} size="sm">
+              <TableHead>
+                <TableRow>
+                  <TableHeader colSpan={2}>{title}</TableHeader>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {Object.entries(mappings)
+                  .filter(([, mapper]) => mapper(t) !== undefined)
+                  .map(([label, mapper]) => (
+                    <TableRow key={label}>
+                      <TableCell width="40%">{label}</TableCell>
+                      <TableCell>{mapper(t)}</TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
           )),

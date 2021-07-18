@@ -45,8 +45,10 @@ enum HCERTClaims {
   DigitalHealthCertificate = 1, // eu_dgc_v1, this claim is the same for NHS COVID Passes too.
 }
 
-/** List of kids to exclude from the COSE signature verification. */
-const EXCLUDED_KIDS: Uint8Array[] = [];
+/** List of KIDs to exclude from the COSE signature verification. */
+const EXCLUDED_KIDS: Uint8Array[] = [
+  Uint8Array.from([217, 25, 55, 95, 193, 231, 182, 178]), // https://dgc.a-sit.at/ehn test certificate
+];
 
 /**
  * Parses the given 2D barcode payload.

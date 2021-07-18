@@ -8,5 +8,5 @@ export function getFromValueSetValues<T extends string>(obj: { [key in T]: { dis
     return obj[key].display;
   }
 
-  return 'Unknown';
+  return `Unknown (${key})`;
 }

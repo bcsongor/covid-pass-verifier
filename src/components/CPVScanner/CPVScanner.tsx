@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button, Grid, Row, Column } from 'carbon-components-react';
-import { Misuse32, CheckmarkFilled32, CheckmarkFilledWarning32 } from '@carbon/icons-react';
+import { Misuse32, CheckmarkFilled32, CheckmarkFilledWarning32, AddAlt32 } from '@carbon/icons-react';
 import CPVQrReader from '@cpv/components/CPVQrReader';
 import CPVQrDataParser from '@cpv/components/CPVQrDataTable';
 import { HCERTStatus } from '@cpv/lib/hcert-verification';
@@ -19,6 +19,16 @@ const hcertStatusMapping = {
   [HCERTStatus.NotVaccinated]: {
     icon: <Misuse32 />,
     label: 'Not Vaccinated',
+    className: 'red',
+  },
+  [HCERTStatus.Negative]: {
+    icon: <CheckmarkFilled32 />,
+    label: 'Negative',
+    className: 'green',
+  },
+  [HCERTStatus.Positive]: {
+    icon: <AddAlt32 />,
+    label: 'Positive',
     className: 'red',
   },
   [HCERTStatus.Expired]: {
