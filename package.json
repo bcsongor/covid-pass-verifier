@@ -57,6 +57,7 @@
     "test": "craco test",
     "deploy": "scripts/deploy.sh",
     "update-certificates": "scripts/update-certificates.js",
+    "build-certificate-list": "scripts/build-certificate-list.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

@@ -1,4 +1,4 @@
-# 🦠 COVID Pass Verifier [![License](https://img.shields.io/github/license/bcsongor/covid-pass-verifier?style=plastic)](https://opensource.org/licenses/Apache-2.0) ![GitHub issues](https://img.shields.io/github/issues/bcsongor/covid-pass-verifier?style=plastic)
+# 🦠 COVID Pass Verifier [![License](https://img.shields.io/github/license/bcsongor/covid-pass-verifier?style=plastic)](https://opensource.org/licenses/Apache-2.0) [![GitHub issues](https://img.shields.io/github/issues/bcsongor/covid-pass-verifier?style=plastic)](https://github.com/bcsongor/covid-pass-verifier/issues)
 
 > Scan, parse and verify HCERT compliant government-issued COVID-19 passes.
 
@@ -8,14 +8,16 @@ All processing (including scanning, parsing and verification) happens on the loc
 
 ## Usage
 
-Use a device that either has a built-in camera (e.g. smartphone) or has an external camera attached (e.g. desktop with webcamera).
+Use a device that either has a built-in camera (e.g. smartphone) or has an external camera attached (e.g. desktop with webcam).
 
 ### Steps
 
 1. Navigate to https://covid-pass-verifier.com/
 2. Click on _Scan QR Code_
-3. Scan the COVID Pass QR code
-4. If the COVID pass was valid a table will be displayed with the details and a badge showing the vaccination status
+3. Scan the COVID pass QR code
+4. If the COVID pass is
+    - *valid*: a badge and a table will be displayed with the vaccination status and details
+    - *invalid*: an error badge will be displayed
 
 ### Supported platforms
 
@@ -24,7 +26,11 @@ Use a device that either has a built-in camera (e.g. smartphone) or has an exter
 | Desktop (Chrome, Safari, Edge, etc.) | ✔  |
 | iOS Safari                           | ✔  |
 | iPadOS Safari                        | ✔  |
-| Android                              | ❔  |
+| Android                              | ✔  |
+
+### Supported certificates
+
+See [docs/Certificates.md](docs/Certificates.md) for the list government-issued certificates currently supported by COVID Pass Verifier.
 
 ## Development
 
@@ -61,7 +67,6 @@ This requires certain access tokens and keys which can be set in the `.env` file
 
 Updates the certificates used in the web application to verify the signature of the CBOR Web Tokens.
 
-This currently fetches the EU certificates from the Austrian government and enriches the data with a \
-3rd party source containing the UK certificates.
+This currently fetches the EU certificates from the Austrian government and enriches the data with a 3rd party source containing the UK certificates.
 
 Certificates currently used by the web app: https://covid-pass-verifier.com/assets/certificates.json
