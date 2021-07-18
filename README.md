@@ -70,3 +70,8 @@ Updates the certificates used in the web application to verify the signature of 
 This currently fetches the EU certificates from the Austrian government and enriches the data with a 3rd party source containing the UK certificates.
 
 Certificates currently used by the web app: https://covid-pass-verifier.com/assets/certificates.json
+
+#### `yarn build-certificate-list`
+
+Builds a Markdown document that lists the currently supported certificates.\
+See output at [docs/Certificates.md](docs/Certificates.md).
