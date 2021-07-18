@@ -33,7 +33,7 @@ export const CPVLandingPage = (): JSX.Element => (
             email me
           </a>{' '}
           at <span className="email">hello@covid-pass-verifier.com</span> with any questions or concerns. The source
-          code for the enitre web application is available{' '}
+          code for the entire web application is available{' '}
           <a href="https://github.com/bcsongor/covid-pass-verifier" target="_blank" rel="noreferrer">
             on&nbsp;&nbsp;
             <LogoGithub16 /> GitHub
