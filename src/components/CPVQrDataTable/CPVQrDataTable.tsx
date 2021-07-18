@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Accordion,
   AccordionItem,
@@ -57,7 +57,7 @@ const hcertVaccineMappings: HCERTMappings<VaccinationGroup> = {
   },
 };
 
-export const CPVQrDataParser = ({ qrData, onHCERTStatus }: Props): JSX.Element => {
+export const CPVQrDataTable = ({ qrData, onHCERTStatus }: Props): JSX.Element => {
   const [hcert, setHcert] = useState<HCERT | null>(null);
 
   useEffect(() => {

@@ -1,8 +1,8 @@
-import React from 'react';
+import { useState } from 'react';
 import { Button, Grid, Row, Column } from 'carbon-components-react';
 import { Misuse32, CheckmarkFilled32, CheckmarkFilledWarning32 } from '@carbon/icons-react';
 import CPVQrReader from '@cpv/components/CPVQrReader';
-import CPVQrDataParser from '@cpv/components/CPVQrDataParser';
+import CPVQrDataParser from '@cpv/components/CPVQrDataTable';
 import { HCERTStatus } from '@cpv/lib/hcert-verification';
 
 const hcertStatusMapping = {
@@ -51,9 +51,9 @@ const CPVCertificateStatus = ({ status }: { status: HCERTStatus }): JSX.Element 
 };
 
 export const CPVScanner = (): JSX.Element => {
-  const [isScanning, setIsScanning] = React.useState<boolean>(false);
-  const [qrData, setQrData] = React.useState<string | null>(null);
-  const [status, setStatus] = React.useState<HCERTStatus | null>(null);
+  const [isScanning, setIsScanning] = useState<boolean>(false);
+  const [qrData, setQrData] = useState<string | null>(null);
+  const [status, setStatus] = useState<HCERTStatus | null>(null);
 
   const startScanning = () => {
     setQrData(null);

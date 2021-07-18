@@ -1,4 +1,3 @@
-import React from 'react';
 import { LogoGithub16 } from '@carbon/icons-react';
 import CPVScanner from '@cpv/components/CPVScanner';
 

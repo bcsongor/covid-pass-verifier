@@ -22,5 +22,8 @@ module.exports = {
       pragma: 'React',
       version: 'detect'
     }
+  },
+  rules: {
+    'react/react-in-jsx-scope': 'off' // No longer required as of React 17.
   }
 };
