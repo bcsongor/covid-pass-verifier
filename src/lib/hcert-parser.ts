@@ -42,10 +42,10 @@ enum CWTClaims {
  * Note: Currently all government-issued certificates share the same claim key.
  */
 enum HCERTClaims {
-  DigitalHealthCertificate = 1, // eu_dgc_v1, this claim is the same for NHS Covid Passes too.
+  DigitalHealthCertificate = 1, // eu_dgc_v1, this claim is the same for NHS COVID Passes too.
 }
 
-/** List of kids exludes from the COSE signature verification. */
+/** List of kids to exclude from the COSE signature verification. */
 const EXCLUDED_KIDS: Uint8Array[] = [];
 
 /**
@@ -100,7 +100,7 @@ export const parseHCERT = async (barcodePayload: string): Promise<HCERT> => {
 
   const kid = p.get(COSEHeaderParameters.KeyIdentifier);
 
-  // TODO: Temporary exclusion for certificates we still need to acquire (e.g. UK's NHS).
+  // Temporary exclusion of certificates we still need to acquire.
   const isExcluded = EXCLUDED_KIDS.some((ekid) => equal8(kid, ekid));
 
   let sig = isExcluded;
@@ -119,7 +119,7 @@ export const parseHCERT = async (barcodePayload: string): Promise<HCERT> => {
       await cose.sign.verify(cwt, { key: crt.pub });
       sig = true;
     } finally {
-      // Do nothing here, sig is either fals or true depending whether cose.sign.verify threw or not.
+      // Do nothing here, sig is either false or true depending whether cose.sign.verify threw or not.
     }
   }
 
