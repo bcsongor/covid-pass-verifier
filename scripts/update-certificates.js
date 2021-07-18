@@ -83,10 +83,8 @@ async function fetchEUCertificates(isProduction) {
 }
 
 async function fetchUKCertificates() {
-  // kudos to @mauimauer for finding these public keys.
-  const res = await fetch('https://raw.githubusercontent.com/andypandy47/Answer-Digital-Verifier-App/master/VerifierApp.Api/VerifierApp.Api/Repositories/Data/PublicKeys.json');
-  // remove BOM from response.
-  const json = JSON.parse((await res.buffer()).slice(3).toString('utf-8'));
+  const res = await fetch('https://covid-status.service.nhsx.nhs.uk/pubkeys/keys.json');
+  const json = await res.json();
 
   return json.map(p => {
     const pubhex = Buffer.from(p.publicKey, 'base64').toString('hex');

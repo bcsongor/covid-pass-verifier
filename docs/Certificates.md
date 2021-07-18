@@ -2,7 +2,7 @@
 
 **Last updated:** 2021-07-18
 
-**Number of supported certificates:** 152
+**Number of supported certificates:** 150
 
 |KID|Country|Issuer|Subject|
 |-|-|-|-|
@@ -117,8 +117,6 @@
 |`S2V5M1BSTw==`|GB|||
 |`S2V5NFBSTw==`|GB|||
 |`S2V5NVBSTw==`|GB|||
-|`GZ2cfMLwyK8=`|GB|||
-|`S2V5MQ==`|GB|||
 |`vvYa1vaWkGg=`|GR|||
 |`25QCxBrBJvA=`|HR|AKD d.o.o.|AKD d.o.o.|
 |`4GkJs9YsYS4=`|HU|EESZT|OKFO|
