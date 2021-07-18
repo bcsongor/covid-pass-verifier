@@ -4,10 +4,10 @@ import { Route, Switch } from 'react-router-dom';
 import '@cpv/app.scss';
 import CPVLandingPage from '@cpv/content/CPVLandingPage';
 
-function App() {
+function App(): JSX.Element {
   return (
     <Switch>
-      <Route exact path="/" component={CPVLandingPage} />
+      <Route exact={true} path="/" component={CPVLandingPage} />
     </Switch>
   );
 }

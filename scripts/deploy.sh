@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# Exit script when any command fails.
+set -e
+
+yarn lint
 yarn build
 
 source .env

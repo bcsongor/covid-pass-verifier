@@ -9,46 +9,48 @@ const hcertStatusMapping = {
   [HCERTStatus.PartiallyVaccinated]: {
     icon: <CheckmarkFilledWarning32 />,
     label: 'Partially Vaccinated',
-    className: 'amber'
+    className: 'amber',
   },
   [HCERTStatus.FullyVaccinated]: {
     icon: <CheckmarkFilled32 />,
     label: 'Fully Vaccinated',
-    className: 'green'
+    className: 'green',
   },
   [HCERTStatus.NotVaccinated]: {
     icon: <Misuse32 />,
     label: 'Not Vaccinated',
-    className: 'red'
+    className: 'red',
   },
   [HCERTStatus.Expired]: {
     icon: <Misuse32 />,
     label: 'Expired',
-    className: 'red'
+    className: 'red',
   },
   [HCERTStatus.UnverifiedSignature]: {
     icon: <Misuse32 />,
     label: 'Unverified Signature',
-    className: 'red'
+    className: 'red',
   },
   [HCERTStatus.Error]: {
     icon: <Misuse32 />,
     label: 'Error',
-    className: 'red'
-  }
+    className: 'red',
+  },
 };
 
-const CPVCertificateStatus = ({ status }: { status: HCERTStatus } ) => {
+const CPVCertificateStatus = ({ status }: { status: HCERTStatus }): JSX.Element => {
   const mapped = hcertStatusMapping[status];
 
   return (
     <div className={['cpv-scanner__status', mapped.className].join(' ')}>
-      {mapped.icon}<br />{mapped.label}
+      {mapped.icon}
+      <br />
+      {mapped.label}
     </div>
-  )
-}
+  );
+};
 
-export const CPVScanner = () => {
+export const CPVScanner = (): JSX.Element => {
   const [isScanning, setIsScanning] = React.useState<boolean>(false);
   const [qrData, setQrData] = React.useState<string | null>(null);
   const [status, setStatus] = React.useState<HCERTStatus | null>(null);
@@ -71,23 +73,24 @@ export const CPVScanner = () => {
 
   return (
     <>
-      {!isScanning &&
-        <Grid className="cpv-scanner__grid" condensed>
+      {!isScanning && (
+        <Grid className="cpv-scanner__grid" condensed={true}>
           <Row>
             <Column sm={2}>
               <Button onClick={startScanning}>Scan QR Code</Button>
             </Column>
-            <Column sm={2}>
-              {status !== null && <CPVCertificateStatus status={status} />}
-            </Column>
+            <Column sm={2}>{status !== null && <CPVCertificateStatus status={status} />}</Column>
           </Row>
         </Grid>
-      }
-      {isScanning &&
+      )}
+      {isScanning && (
         <div>
-          <Button kind="danger" onClick={stopScanning}>Stop scanning</Button>
+          <Button kind="danger" onClick={stopScanning}>
+            Stop scanning
+          </Button>
           <CPVQrReader onQrData={onQrData} />
-        </div>}
+        </div>
+      )}
       {qrData && <CPVQrDataParser qrData={qrData} onHCERTStatus={onHCERTStatus} />}
     </>
   );

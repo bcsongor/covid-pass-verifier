@@ -21,12 +21,12 @@ enum COSEHeaderParameters {
   KeyIdentifier = 4, // kid
   InitialisationVector = 5, // IV
   PartialInitialisationVector = 6, // Partial IV
-  CounterSignature = 7 // counter signature
+  CounterSignature = 7, // counter signature
 }
 
 /** COSE signature algorithms used to verify the signature. */
 enum COSESignatureAlgoritms {
-  ES256_SHA256= -7
+  ES256_SHA256 = -7,
 }
 
 /** Claims in the CBOR Web Token. */
@@ -34,7 +34,7 @@ enum CWTClaims {
   Issuer = 1, // iss
   IssuedAt = 6, // iat
   ExpirationTime = 4, // exp
-  HealthCertificate = -260 // hcert
+  HealthCertificate = -260, // hcert
 }
 
 /**
@@ -42,7 +42,7 @@ enum CWTClaims {
  * Note: Currently all government-issued certificates share the same claim key.
  */
 enum HCERTClaims {
-  DigitalHealthCertificate = 1 // eu_dgc_v1, this claim is the same for NHS Covid Passes too.
+  DigitalHealthCertificate = 1, // eu_dgc_v1, this claim is the same for NHS Covid Passes too.
 }
 
 /** List of kids exludes from the COSE signature verification. */
@@ -81,8 +81,11 @@ export const parseHCERT = async (barcodePayload: string): Promise<HCERT> => {
   const coseSignedMsg = cbor.decode(cwt);
 
   // Validate the structure of the decoded CBOR structure.
-  if ((coseSignedMsg.tag !== CBORTags.COSESign && coseSignedMsg.tag !== CBORTags.COSESign1) || coseSignedMsg.value.length !== 4) {
-    throw new Error('invalid COSE sign structure')
+  if (
+    (coseSignedMsg.tag !== CBORTags.COSESign && coseSignedMsg.tag !== CBORTags.COSESign1) ||
+    coseSignedMsg.value.length !== 4
+  ) {
+    throw new Error('invalid COSE sign structure');
   }
 
   // Deconstruct the COSE sign structure (https://datatracker.ietf.org/doc/html/rfc8152#page-17)
@@ -98,7 +101,7 @@ export const parseHCERT = async (barcodePayload: string): Promise<HCERT> => {
   const kid = p.get(COSEHeaderParameters.KeyIdentifier);
 
   // TODO: Temporary exclusion for certificates we still need to acquire (e.g. UK's NHS).
-  const isExcluded = EXCLUDED_KIDS.some(ekid => equal8(kid, ekid));
+  const isExcluded = EXCLUDED_KIDS.some((ekid) => equal8(kid, ekid));
 
   let sig = isExcluded;
 
@@ -115,7 +118,9 @@ export const parseHCERT = async (barcodePayload: string): Promise<HCERT> => {
     try {
       await cose.sign.verify(cwt, { key: crt.pub });
       sig = true;
-    } finally {}
+    } finally {
+      // Do nothing here, sig is either fals or true depending whether cose.sign.verify threw or not.
+    }
   }
 
   // Decode the claims in the payload.

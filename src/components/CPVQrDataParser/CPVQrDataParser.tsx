@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Accordion, AccordionItem, CodeSnippet, Table, TableHead, TableBody, TableRow, TableHeader, TableCell } from 'carbon-components-react';
+import {
+  Accordion,
+  AccordionItem,
+  CodeSnippet,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableHeader,
+  TableCell,
+} from 'carbon-components-react';
 
 import { HCERT, VaccinationGroup } from '@cpv/lib/hcert';
 import { parseHCERT } from '@cpv/lib/hcert-parser';
@@ -23,31 +33,31 @@ type HCERTMappings<T> = {
 };
 
 const hcertMetadataMappings: HCERTMappings<HCERT> = {
-  'General': {
+  General: {
     'Issuer Country': (h) => h.iss,
     'Issued At': (h) => formatTimestamp(h.iat),
     'Expires At': (h) => formatTimestamp(h.exp),
   },
-  'Personal': {
+  Personal: {
     'Full Name': ({ hcert: { nam } }) => `${nam.fn} ${nam.gn}`,
-    'Date of Birth': ({ hcert }) => hcert.dob
-  }
+    'Date of Birth': ({ hcert }) => hcert.dob,
+  },
 };
 
 const hcertVaccineMappings: HCERTMappings<VaccinationGroup> = {
-  'Vaccine': {
+  Vaccine: {
     'Target Disease': (v) => getTargetDisease(v.tg),
-    'Vaccine': (v) => getVaccineProphylaxis(v.vp),
+    Vaccine: (v) => getVaccineProphylaxis(v.vp),
     'Vaccine Product': (v) => getVaccineMedicinalProduct(v.mp),
     'Vaccine Manufacturer': (v) => getVaccineManufacturer(v.ma),
-    'Dose': (v) => `${v.dn} / ${v.sd}`,
+    Dose: (v) => `${v.dn} / ${v.sd}`,
     'Date of Vaccination': (v) => v.dt,
     'Country of Vaccination': (v) => v.co,
-    'Certificate Issuer': (v) => v.is
-  }
+    'Certificate Issuer': (v) => v.is,
+  },
 };
 
-export const CPVQrDataParser = ({ qrData, onHCERTStatus }: Props) => {
+export const CPVQrDataParser = ({ qrData, onHCERTStatus }: Props): JSX.Element => {
   const [hcert, setHcert] = useState<HCERT | null>(null);
 
   useEffect(() => {
@@ -68,13 +78,13 @@ export const CPVQrDataParser = ({ qrData, onHCERTStatus }: Props) => {
   }, [qrData]);
 
   if (hcert === null) {
-    return null;
+    return <></>;
   }
 
   return (
     <Accordion className="cpv-qr-data-parser__accordion">
-      <AccordionItem title="Pass information" open>
-        {Object.entries(hcertMetadataMappings).map(([title, mappings]) =>
+      <AccordionItem title="Pass information" open={true}>
+        {Object.entries(hcertMetadataMappings).map(([title, mappings]) => (
           <Table key={title} size="sm">
             <TableHead>
               <TableRow>
@@ -82,18 +92,18 @@ export const CPVQrDataParser = ({ qrData, onHCERTStatus }: Props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {Object.entries(mappings).map(([label, mapper]) =>
+              {Object.entries(mappings).map(([label, mapper]) => (
                 <TableRow key={label}>
                   <TableCell width="40%">{label}</TableCell>
                   <TableCell>{mapper(hcert)}</TableCell>
                 </TableRow>
-              )}
+              ))}
             </TableBody>
           </Table>
-        )}
+        ))}
 
         {hcert.hcert.v.map((v, idx) =>
-          Object.entries(hcertVaccineMappings).map(([title, mappings]) =>
+          Object.entries(hcertVaccineMappings).map(([title, mappings]) => (
             <Table key={title + idx} size="sm">
               <TableHead>
                 <TableRow>
@@ -101,23 +111,19 @@ export const CPVQrDataParser = ({ qrData, onHCERTStatus }: Props) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {Object.entries(mappings).map(([label, mapper]) =>
+                {Object.entries(mappings).map(([label, mapper]) => (
                   <TableRow key={label}>
                     <TableCell width="40%">{label}</TableCell>
                     <TableCell>{mapper(v)}</TableCell>
                   </TableRow>
-                )}
+                ))}
               </TableBody>
             </Table>
-          )
+          )),
         )}
       </AccordionItem>
       <AccordionItem title="Barcode payload">
-        <CodeSnippet
-          type="multi"
-          feedback="Copied to clipboard"
-          wrapText={true}
-        >
+        <CodeSnippet type="multi" feedback="Copied to clipboard" wrapText={true}>
           {qrData}
         </CodeSnippet>
       </AccordionItem>

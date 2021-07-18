@@ -9,7 +9,7 @@ export interface VaccinationGroup {
   co: string; // country that administered the vaccine
   is: string; // certificate issuer
   ci: string; // unique certificate identifier
-};
+}
 
 export interface DigitalHealthCertificate {
   ver: string; // version
@@ -21,7 +21,7 @@ export interface DigitalHealthCertificate {
     gnt: string; // standardised surname (ICAO 9303)
   };
   v: VaccinationGroup[];
-};
+}
 
 /**
  * Specified in https://ec.europa.eu/health/sites/default/files/ehealth/docs/covid-certificate_json_specification_en.pdf.
@@ -33,4 +33,4 @@ export interface HCERT {
   exp: number; // expires at timestamp
   hcert: DigitalHealthCertificate;
   sig: boolean; // signature validity
-};
+}
