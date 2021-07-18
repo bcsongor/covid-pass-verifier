@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { LogoGithub16 } from '@carbon/icons-react';
 import CPVScanner from '@cpv/components/CPVScanner';
 
 export const CPVLandingPage = (): JSX.Element => (
@@ -34,7 +34,12 @@ export const CPVLandingPage = (): JSX.Element => (
             email me
           </a>{' '}
           at <span className="email">hello@covid-pass-verifier.com</span> with any questions or concerns. The source
-          code for the enitre web application will be made public on GitHub.
+          code for the enitre web application is available{' '}
+          <a href="https://github.com/bcsongor/covid-pass-verifier" target="_blank" rel="noreferrer">
+            on&nbsp;&nbsp;
+            <LogoGithub16 /> GitHub
+          </a>
+          .
         </p>
       </div>
     </div>
