@@ -6,6 +6,15 @@ Compatible with EU Digital COVID Certificates 🇪🇺 and NHS COVID Passes 🇬
 
 All processing (including scanning, parsing and verification) happens on the local device and no data is sent to external servers.
 
+## Features
+
+- Scans and verifies COVID passes issued by a [wide range of countries](docs/Certificates.md)
+- Runs locally on any device with a modern browser and a camera, no active internet connection required
+- Focuses on privacy: no data is sent to external servers
+- Supports vaccination and test result certificates, support for recovery certificates coming soon
+- Shows vaccination status badge: *fully vaccinated*, *partially vaccinated* or *not vaccinated*
+- Shows test result badge: *positive* or *negative*
+
 ## Usage
 
 Use a device that either has a built-in camera (e.g. smartphone) or has an external camera attached (e.g. desktop with webcam).
@@ -16,7 +25,7 @@ Use a device that either has a built-in camera (e.g. smartphone) or has an exter
 2. Click on _Scan QR Code_
 3. Scan the COVID pass QR code
 4. If the COVID pass is
-    - *valid*: a badge and a table will be displayed with the vaccination status and details
+    - *valid*: a badge and a table will be displayed with the status and details
     - *invalid*: an error badge will be displayed
 
 ### Supported platforms
