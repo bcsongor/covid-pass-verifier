@@ -50,7 +50,13 @@ async function fetchEUCertificates(isProduction) {
   if (isProduction) {
     // Production trust list from AT government.
     // See discussion: https://github.com/eu-digital-green-certificates/dgc-participating-countries/issues/10
-    const res = await fetch('https://greencheck.gv.at/api/masterdata');
+    const res = await fetch('https://greencheck.gv.at/api/v2/masterdata',{
+      headers: {
+        "x-app-version": "1.8",
+        "x-app-type": "browser",
+        "Accept": "application/json"
+      }
+    });
     const json = await res.json();
     const trustListCbor = Buffer.from(json.trustList.trustListContent, 'base64');
     const trustList = cbor.decode(trustListCbor);
